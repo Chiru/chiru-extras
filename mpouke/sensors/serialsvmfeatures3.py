@@ -1,7 +1,7 @@
 import serial
 from time import sleep
 #import datetime
-import csv
+#import csv
 #import svmcomplete
 import numpy
 import pywt
@@ -61,7 +61,10 @@ def wavelet(vect):
 	#print aaa
 	ff = numpy.fft.fft(aaa)
 	#print ff
-	return ff
+	ff = abs(ff)
+	f = ff.tolist()
+	#print len(f)
+	return f
 
 try:
 
@@ -98,18 +101,6 @@ try:
 			featuregx.append(float(gx))
 			featuregy.append(float(gy))
 			featuregz.append(float(gz))
-			#print ax
-			#line = vector[-6:]
-			#iline = [float(n) for n in line]
-			#print vector[-6:]
-			#output.writerow(line)
-		   	#result=svmcomplete.classify(iline)
-			#print result
-		    #sleep(0.5)
-		    #print 'not blocked'
-	    #print feature
-	    #print featureax
-	    #print len(featureax)
 	    if len(featureax)==64:
 		    eax = energy(featureax)
 		    eay = energy(featureay)
@@ -126,24 +117,11 @@ try:
 		    wavgz = wavelet(featuregz)
 	
 		    energies.extend([eax,eay,eaz,egx,egy,egz])
-		    wavelets.extend([wavax[:128],wavay[:128],wavaz[:128],wavgx[:128],wavgy[:128],wavgz[:128]])
-		    #print eax
-		    #print wavax[:128]
-	            #a = [item for sublist in allfeatures for item in sublist]
+		    wavelets.extend([wavax,wavay,wavaz,wavgx,wavgy,wavgz])
 		    print energies
-		    #print wavelets
-	            #print allfeatures
 	            wva = list(flatten(wavelets))
-		    #print wva
-		    #allfeatures.extend([energies, wva])
-	            wva /= numpy.max(numpy.abs(wva),axis=0)
-		    w = wva.tolist()
-		    energies /= numpy.max(numpy.abs(energies),axis=0)
-		    allfeatures.extend([energies, w])
-		    #print allfeatures
-		    #feat = allfeatures.tolist()
-		    #print allfeatures
-		    #print len(allfeatures)
+	            allfeatures.extend([energies, wva])
+	
 	    	    af = list(flatten(allfeatures))
 		    print af
 		    print len(af)

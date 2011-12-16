@@ -1,7 +1,7 @@
 import serial
 from time import sleep
 #import datetime
-import csv
+#import csv
 #import svmcomplete
 import numpy
 import pywt
@@ -61,7 +61,10 @@ def wavelet(vect):
 	#print aaa
 	ff = numpy.fft.fft(aaa)
 	#print ff
-	return ff
+	ff = abs(ff)
+	f = ff.tolist()
+	#print len(f)
+	return f
 
 try:
 
@@ -126,7 +129,7 @@ try:
 		    wavgz = wavelet(featuregz)
 	
 		    energies.extend([eax,eay,eaz,egx,egy,egz])
-		    wavelets.extend([wavax[:128],wavay[:128],wavaz[:128],wavgx[:128],wavgy[:128],wavgz[:128]])
+		    wavelets.extend([wavax,wavay,wavaz,wavgx,wavgy,wavgz])
 		    #print eax
 		    #print wavax[:128]
 	            #a = [item for sublist in allfeatures for item in sublist]
@@ -134,16 +137,17 @@ try:
 		    #print wavelets
 	            #print allfeatures
 	            wva = list(flatten(wavelets))
+		    #w = wva.tolist()
 		    #print wva
 		    #allfeatures.extend([energies, wva])
-	            wva /= numpy.max(numpy.abs(wva),axis=0)
-		    w = wva.tolist()
-		    energies /= numpy.max(numpy.abs(energies),axis=0)
-		    allfeatures.extend([energies, w])
+	            allfeatures.extend([energies, wva])
 		    #print allfeatures
 		    #feat = allfeatures.tolist()
-		    print allfeatures
-		    print len(allfeatures)
+		    #print allfeatures
+		    #print len(allfeatures)
+	    	    af = list(flatten(allfeatures))
+		    print af
+		    print len(af)
 
 
 except KeyboardInterrupt :
