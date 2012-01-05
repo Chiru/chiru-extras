@@ -100,7 +100,7 @@ while True:
             sleep(1)
             print "GO!!!"
             buffer = ser.read(ser.inWaiting())
-	    for r in range(10):
+	    for r in range(5):
 		    vector=[]
 		    data = ser.readline()
 		    data = data.split(",")
@@ -127,7 +127,7 @@ while True:
             sleep(1)
             print "GO!!!"
 	    buffer = ser.read(ser.inWaiting())
-	    for r in range(10):
+	    for r in range(5):
 		    vector=[]
 		    data = ser.readline()
 		    data = data.split(",")
@@ -153,7 +153,7 @@ while True:
             sleep(1)
             print "GO!!!"
 	    buffer = ser.read(ser.inWaiting())
-	    for r in range(10):
+	    for r in range(5):
 		    vector=[]
 		    data = ser.readline()
 		    data = data.split(",")
@@ -179,7 +179,7 @@ while True:
             sleep(1)
             print "GO!!!"
 	    buffer = ser.read(ser.inWaiting())
-	    for r in range(10):
+	    for r in range(5):
 		    vector=[]
 		    data = ser.readline()
 		    data = data.split(",")

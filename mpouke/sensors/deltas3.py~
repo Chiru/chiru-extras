@@ -3,6 +3,7 @@ import numpy
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from pylab import *
 
 data = csv.reader(open('3dgestures.csv'), delimiter=',')
 xs = []
@@ -18,6 +19,8 @@ initialposx = float(0)
 initialposy = float(0)
 initialposz = float(0)
 
+ion()
+
 time = float(0.1)
 
 fig = plt.figure()
@@ -31,8 +34,9 @@ def velocity(ini, acc, time):
 #	for range in 150:
 #		gestures.append(row[:3])
 	
-
+fign = 0
 for row in data:
+	fign = int(fign) + 1
 	counter = 0
 	xs = []
 	ys = []
@@ -74,8 +78,10 @@ for row in data:
 	ax.set_zlabel('Z Label')
 
 	print xs
-	plt.show()
-	print xs
+	draw()
+	fign = str(fign)
+	plt.savefig(fign+'.png')
+	#print xs
 	#row = data.next()
 
 	#ax.scatter(posx,posy,posz, s=20, c='b')

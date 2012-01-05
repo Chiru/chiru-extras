@@ -9,10 +9,10 @@ features=[]
 labels=[]
 
 for row in dataset:
-	ftrs=row[0:6]	
-	iftrs=[]
-	for f in ftrs:
-		if len(f)==7:
+	if len(row)==7:
+		ftrs=row[0:6]	
+		iftrs=[]
+		for f in ftrs:
 			iftrs.append(float(f))
 		features.append(iftrs)
 		if row[6]=='Still': 

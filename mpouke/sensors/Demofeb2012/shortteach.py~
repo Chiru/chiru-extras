@@ -5,7 +5,7 @@ from time import sleep
 
 #dataset=csv.reader(open('data.csv'), delimiter=',')
 
-output = csv.writer(open('shortgestures.csv', 'a'), delimiter=',')
+output = csv.writer(open('shortgestures2.csv', 'a'), delimiter=',')
 dataset= csv.reader(open('data.csv'), delimiter=',')
 port = "/dev/rfcomm0"
 ser = serial.Serial(port, baudrate=9600, timeout=10)
@@ -225,7 +225,7 @@ while True:
 			#print result
 
     elif selection == '6':
-	    print "Get ready for 'LargeCircleLeft' in 3..."
+	    print "Get ready for 'Shake' in 3..."
 	    sleep(1)
 	    print "2..."
 	    sleep(1)
@@ -243,7 +243,7 @@ while True:
 		    if len(vector) > 3:
 			line = vector[-6:]
 			iline = [int(n) for n in line]
-			iline.append('LargeCircleLeft')
+			iline.append('Shake')
 			output.writerow(iline)
 			print iline
 			#vectorlist.append(iline)
