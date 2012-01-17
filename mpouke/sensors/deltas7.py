@@ -22,7 +22,7 @@ initialposz = float(0)
 
 ion()
 
-time = float(0.1)
+time = float(0.01)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -90,7 +90,7 @@ for row in data:
 	initialposx = float(0)
 	initialposy = float(0)
 	initialposz = float(0)
-	while counter < 150:
+	while counter < 250:
 	
 		accx = float(row[0])
 		#accy = float(row[1]-1000)
@@ -148,9 +148,9 @@ for row in data:
 	#print alpha
 	#print beta
 
-	mrot = numpy.array([[(((numpy.cos(alpha))**2)*numpy.sin(beta)+(numpy.sin(alpha))**2),((numpy.cos(alpha))*numpy.sin(alpha)*(numpy.sin(beta-1))),-(numpy.cos(alpha))*numpy.cos(beta)],
-		           [(numpy.cos(alpha)*numpy.sin(alpha)*(numpy.sin(beta-1))),(((numpy.sin(alpha))**2)*numpy.sin(beta)+(numpy.cos(alpha))**2),-(numpy.sin(alpha))*numpy.cos(beta)],
-	                   [(numpy.cos(alpha)*numpy.cos(beta)),(numpy.sin(alpha)*numpy.cos(beta)),(numpy.sin(beta))]])
+	mrot = numpy.array([[((numpy.cos(alpha))**2)*numpy.sin(beta)+(numpy.sin(alpha))**2,(numpy.cos(alpha))*numpy.sin(alpha)*(numpy.sin(beta)-1),-(numpy.cos(alpha))*numpy.cos(beta)],
+		           [numpy.cos(alpha)*numpy.sin(alpha)*(numpy.sin(beta)-1),((numpy.sin(alpha))**2)*numpy.sin(beta)+(numpy.cos(alpha))**2,-(numpy.sin(alpha))*numpy.cos(beta)],
+	                   [numpy.cos(alpha)*numpy.cos(beta),numpy.sin(alpha)*numpy.cos(beta),numpy.sin(beta)]])
 
 	
 	for i,j,k in zip(allaccx,allaccy,allaccz):

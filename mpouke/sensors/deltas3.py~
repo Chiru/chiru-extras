@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from pylab import *
 
-data = csv.reader(open('3dgestures.csv'), delimiter=',')
+data = csv.reader(open('3dgestures3.csv'), delimiter=',')
 xs = []
 ys = []
 zs = []
@@ -41,6 +41,13 @@ for row in data:
 	xs = []
 	ys = []
 	zs = []
+	initialx = float(0)
+	initialy = float(0)
+	initialz = float(0)
+
+	initialposx = float(0)
+	initialposy = float(0)
+	initialposz = float(0)
 	while counter < 150:
 	
 		accx = float(row[0])

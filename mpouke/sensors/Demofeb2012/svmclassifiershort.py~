@@ -45,7 +45,7 @@ raw_input("Press enter when done...")
 prob = svm_problem(labels,feat)
 param = svm_parameter()
 param.kernel_type = RBF
-param.cross_validation = param
+#param.cross_validation = param
 param.C = 10
 #param.kernel_type = LINEAR
 m = svm_train(prob,param)

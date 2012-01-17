@@ -5,7 +5,7 @@ from time import sleep
 
 #dataset=csv.reader(open('data.csv'), delimiter=',')
 
-output = csv.writer(open('3dgestures3.csv', 'a'), delimiter=',')
+output = csv.writer(open('3dgesturesfft2.csv', 'a'), delimiter=',')
 port = "/dev/rfcomm0"
 ser = serial.Serial(port, baudrate=9600, timeout=10)
 #global wholedata[]
@@ -41,7 +41,7 @@ while True:
             print "GO!!!"
             buffer = ser.read(ser.inWaiting())
 	    ser.flushOutput()
-	    for r in range(250):
+	    for r in range(256):
 		    vector=[]
 		    ser.flushOutput()
 		    data = ser.readline()

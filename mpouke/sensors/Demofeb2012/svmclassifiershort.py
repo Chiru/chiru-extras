@@ -39,7 +39,7 @@ a /= np.max(np.abs(a))
 feat = a.tolist()
 
 #print a
-raw_input("Press enter when done...")
+#raw_input("Press enter when done...")
 #answers,inputs = [data[r][label] for r in data],[data[r][features] for r in data]  
 
 prob = svm_problem(labels,feat)

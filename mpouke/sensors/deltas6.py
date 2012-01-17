@@ -90,7 +90,7 @@ for row in data:
 	initialposx = float(0)
 	initialposy = float(0)
 	initialposz = float(0)
-	while counter < 150:
+	while counter < 250:
 	
 		accx = float(row[0])
 		#accy = float(row[1]-1000)
@@ -130,14 +130,21 @@ for row in data:
 	#print projmagn	
 	
 	xynormal = numpy.array([0,0,1])
-	xyangle = numpy.arccos(numpy.dot(unitmean,xynormal))	
+	xyangle = numpy.arccos(numpy.dot(unitmean,xynormal))
+	print xyangle
+	xyangle = numpy.degrees(xyangle)	
+	print xyangle
 
 	products = numpy.dot(unitmean,xaxis)
 	 
 	#print products
 
 	alpha = numpy.arccos(products)
+	#alpha = numpy.degrees(alpha)
 	beta = 90-xyangle
+	print beta
+	beta = numpy.radians(beta)
+	print beta
 	#print alpha
 	#print beta
 
@@ -168,8 +175,8 @@ for row in data:
 	turnedy = (turnedy-numpy.mean(turnedy))/numpy.std(turnedy)
 	turnedz = (turnedz-numpy.mean(turnedz))/numpy.std(turnedz)
 
-	print int(numpy.mean(turnedz))
-	print numpy.var(turnedz)
+	#print int(numpy.mean(turnedz))
+	#print numpy.var(turnedz)
 
 	#print turnedx
 	#print turnedy

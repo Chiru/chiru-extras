@@ -13,6 +13,7 @@ sleep(2)
 ser.write("echo on"+"\r\n")      # write a string
 #ser.write("echo on"+"\r\n")      # write a string
 ser.write("hello"+"\r\n")
+ser.write("stop all"+"\r\n")
 ser.write("sett 114500000"+"\r\n")
 ser.write("ags +000005000 100 1 0"+"\r\n")
 print ser.portstr 

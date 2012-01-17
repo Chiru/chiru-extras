@@ -2,7 +2,7 @@ import serial
 from time import sleep
 #import datetime
 import csv
-import svmclassifiershort
+import svmclassifiergrasp
 
 #output = csv.writer(open('directions.csv', 'wb'), delimiter=',')
 
@@ -31,7 +31,7 @@ while True:
 	iline = [float(n) for n in line]
         #print vector[-6:]
 	#output.writerow(line)
-   	result=svmclassifiershort.classify(iline)
+   	result=svmclassifiergrasp.classify(iline)
 	print result
     #sleep(0.5)
     #print 'not blocked'

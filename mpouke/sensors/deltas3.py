@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from pylab import *
 
-data = csv.reader(open('3dgestures.csv'), delimiter=',')
+data = csv.reader(open('3dgestures3.csv'), delimiter=',')
 xs = []
 ys = []
 zs = []
@@ -86,6 +86,7 @@ for row in data:
 
 	print xs
 	draw()
+	raw_input("Press enter when done...")
 	fign = str(fign)
 	plt.savefig(fign+'.png')
 	#print xs

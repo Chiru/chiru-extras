@@ -101,14 +101,17 @@ for row in data:
 	#print projmagn	
 	
 	xynormal = numpy.array([0,0,1])
-	xyangle = numpy.arccos(numpy.dot(unitmean,xynormal))	
+	xyangle = numpy.arccos(numpy.dot(unitmean,xynormal))
+	print xyangle	
 
 	products = numpy.dot(unitmean,xaxis)
 	 
 	#print products
 
 	alpha = numpy.arccos(products)
+	print alpha
 	beta = 90-xyangle
+	print beta
 	#print alpha
 	#print beta
 
