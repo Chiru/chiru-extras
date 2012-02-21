@@ -6,7 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from pylab import *
 from numpy import linalg as LA
 
-data = csv.reader(open('3dgesturesfft2.csv'), delimiter=',')
+data = csv.reader(open('demo.csv'), delimiter=',')
 xs = []
 ys = []
 zs = []
@@ -27,6 +27,10 @@ time = float(0.01)
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
+def velocity(ini, acc, time):
+	vel = ini + acc*time
+	return vel
+
 fign = 0
 for row in data:
 	fign = int(fign) + 1
@@ -34,6 +38,7 @@ for row in data:
 	xs = []
 	ys = []
 	zs = []
+        coordinates=numpy.array([])
 	gestureacc=numpy.array([])
 	allaccx=numpy.array([])
 	allaccy=numpy.array([])
@@ -75,33 +80,42 @@ for row in data:
 	meany = allaccy.mean()
 	meanz = allaccz.mean()
 
-	meanvector = [meanx, meany, meanz]
-	xyprojection = list(meanvector)
-	xyprojection[2]=0
-	meanmagn = LA.norm(meanvector)
-	projmagn = LA.norm(xyprojection)
-	unitmean = meanvector/meanmagn
-	unitproj = xyprojection/projmagn	
-	xaxis = numpy.array([1,0,0])	
+	meanvector = np.array([meanx, meany, meanz])
+
+        xymatrix = np.array([[1,0,0],[0,1,0],[0,0,0]])
+
+	xyprojection = np.dot(meanvector,xymatrix)
+        xaxis = np.array([1,0,0])
+	alpha = np.arccos(np.dot(xyprojection,xaxis)/(LA.norm(xyprojection)*LA.norm(xaxis)))
+        beta = np.arccos(np.dot(meanvector,xyprojection)/(LA.norm(meanvector)*LA.norm(xyprojection)))
+
+
+	#xyprojection = list(meanvector)
+	#xyprojection[2]=0
+	#meanmagn = LA.norm(meanvector)
+	#projmagn = LA.norm(xyprojection)
+	#unitmean = meanvector/meanmagn
+	#unitproj = xyprojection/projmagn	
+	#xaxis = numpy.array([1,0,0])	
 
 	#print meanmagn
 	#print projmagn	
 	
-	xynormal = numpy.array([0,0,1])
-	xyangle = numpy.arccos(numpy.dot(unitmean,xynormal))
+	#xynormal = numpy.array([0,0,1])
+	#xyangle = numpy.arccos(numpy.dot(unitmean,xynormal))
 	#print xyangle
-	xyangle = numpy.degrees(xyangle)	
+	#xyangle = numpy.degrees(xyangle)	
 	#print xyangle
 
-	products = numpy.dot(unitmean,xaxis)
+	#products = numpy.dot(unitmean,xaxis)
 	 
 	#print products
 
-	alpha = numpy.arccos(products)
+	#alpha = numpy.arccos(products)
 	#alpha = numpy.degrees(alpha)
-	beta = 90-xyangle
+	#beta = 90-xyangle
 	#print beta
-	beta = numpy.radians(beta)
+	#beta = numpy.radians(beta)
 	#print beta
 	#print alpha
 	#print beta
@@ -116,6 +130,7 @@ for row in data:
 		#print accsample
 		turned = numpy.dot(accsample,mrot)
 		#print turned
+                #turned=numpy.array(accsample)
 
 		acx = turned[0]
 		acy = turned[1]
@@ -125,19 +140,31 @@ for row in data:
 		turnedy = numpy.append(turnedy,acy)
 		turnedz = numpy.append(turnedz,acz)	
 			
-	#turnedx = (turnedx-numpy.mean(turnedx))/numpy.std(turnedx)
-	#turnedy = (turnedy-numpy.mean(turnedy))/numpy.std(turnedy)
-	#turnedz = (turnedz-numpy.mean(turnedz))/numpy.std(turnedz)	
+	turnedx = (turnedx-numpy.mean(turnedx))/numpy.std(turnedx)
+	turnedy = (turnedy-numpy.mean(turnedy))/numpy.std(turnedy)
+	turnedz = (turnedz-numpy.mean(turnedz))/numpy.std(turnedz)
 
-	turnedx = (turnedx-numpy.mean(turnedx))
-	turnedy = (turnedy-numpy.mean(turnedy))
-	turnedz = (turnedz-numpy.mean(turnedz))	
+	#allaccx = (allaccx-numpy.mean(allaccx))/numpy.std(allaccx)
+	#allaccy = (allaccy-numpy.mean(allaccy))/numpy.std(allaccy)
+	#allaccz = (allaccz-numpy.mean(allaccz))/numpy.std(allaccz)	
+	
+
+	#turnedx = (turnedx-numpy.mean(turnedx))
+	#turnedy = (turnedy-numpy.mean(turnedy))
+	#turnedz = (turnedz-numpy.mean(turnedz))	
 
 
 
-	freqx = numpy.fft.rfft(turnedx,256)
-	freqy = numpy.fft.rfft(turnedy,256)
-	freqz = numpy.fft.rfft(turnedz,256)
+	#freqx = numpy.fft.fft(turnedx,256)
+	#freqy = numpy.fft.fft(turnedy,256)
+	#freqz = numpy.fft.fft(turnedz,256)
+
+
+	#freqx[:2]=0
+	#freqy[:2]=0
+	#freqz[:2]=0	
+
+	#print freqx
 
 	#print len(freqx)
 
@@ -146,57 +173,57 @@ for row in data:
 
 	#print freqx
 	
-	counter=0	
+	#counter=0	
 
-	for i in freqx:
-		if counter < 3:
-			displacement=0
-		else:
-			f=100
-			omega = 2*numpy.pi*f
-			k=(2*numpy.pi)/omega
+	#for i in freqx:
+	#	if counter < 3:
+	#		displacement=0
+	#	else:
+	#		f=100
+	#		omega = 2*numpy.pi*f
+	#		k=(2*numpy.pi)/omega
 			#print omega
-			displacement = i/(-(omega**2))
+	#		displacement = i/(-(omega**2))
 			#print abs(displacement)
 			#numpy.append(fftvelx,displacement)
 
-			freqx[counter]=displacement
-		counter=counter+1		
+	#		freqx[counter]=displacement
+	#	counter=counter+1		
 			
-	counter=0
+	#counter=0
 
-	for i in freqy:
-		if counter < 3:
-			displacement=0
-		else:
-			f=100
-			omega = 2*numpy.pi*f
-			displacement = i/(-(omega**2))
-			freqy[counter]=displacement
-		counter=counter+1
+	#for i in freqy:
+	#	if counter < 3:
+	#		displacement=0
+	#	else:
+	#		f=100
+	#		omega = 2*numpy.pi*f
+	#		displacement = i/(-(omega**2))
+	#		freqy[counter]=displacement
+	#	counter=counter+1
 
-	counter=0
+	#counter=0
 
-	for i in freqz:
-		if counter < 3:
-			displacement=0
-		else:
-			f=100
-			omega = 2*numpy.pi*f
-			displacement = i/(-(omega**2))
+	#for i in freqz:
+	#	if counter < 3:
+	#		displacement=0
+	#	else:
+	#		f=100
+	#		omega = 2*numpy.pi*f
+	#		displacement = i/(-(omega**2))
 			#numpy.append(fftvelz,displacement)
-			freqz[counter]=displacement
-		counter=counter+1
+	#		freqz[counter]=displacement
+	#	counter=counter+1
 
 	#print freqx
 
-	invx = numpy.fft.irfft(freqx)
-	invy = numpy.fft.irfft(freqy)
-	invz = numpy.fft.irfft(freqz)
+	#invx = numpy.fft.ifft(freqx)
+	#invy = numpy.fft.ifft(freqy)
+	#invz = numpy.fft.ifft(freqz)
 
-	xs = invx.real
-	ys = invy.real
-	zs = invz.real
+	#tx = invx.real
+	#ty = invy.real
+	#tz = invz.real
 	
 	#print turnedx
 
@@ -205,32 +232,33 @@ for row in data:
 	#print turnedy
 	#print turnedz
 
-	#for a,b,c in zip(turnedx,turnedy,turnedz):
+	for a,b,c in zip(turnedx,turnedy,turnedz):
 		
 		#print c
 
-	#	velx = velocity(initialx, a, time)
-	#	vely = velocity(initialy, b, time)
-	#	velz = velocity(initialz, c, time)
+		velx = velocity(initialx, a, time)
+		vely = velocity(initialy, b, time)
+		velz = velocity(initialz, c, time)
 		 
-	#	posx = initialposx + velx*time
-	#	posy = initialposy + vely*time
-	#	posz = initialposz + velz*time
+		posx = initialposx + velx*time
+		posy = initialposy + vely*time
+		posz = initialposz + velz*time
 
-	#	positions.append([posx,posy,posz])
-	#	xs.append(posx)
-	#	ys.append(posy)
-	#	zs.append(posz)
+		positions.append([posx,posy,posz])
+		xs.append(posx)
+		ys.append(posy)
+		zs.append(posz)
 
-	#	initialx = velx
-	#	initialy = vely
-	#	initialz = velz
+		initialx = velx
+		initialy = vely
+		initialz = velz
 	
-	#	initialposx = posx
-	#	initialposy = posy
-	#	initialposz = posz		
+		initialposx = posx
+		initialposy = posy
+		initialposz = posz		
 
-	#print meanvector
+	#print positions
+        print len(positions)
 
 	ax.scatter(xs, ys, zs, s=20, c='b')
 	ax.set_xlabel('X Label')

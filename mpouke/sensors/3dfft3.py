@@ -6,7 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from pylab import *
 from numpy import linalg as LA
 
-data = csv.reader(open('3dgesturesfft.csv'), delimiter=',')
+data = csv.reader(open('3dgesturesfft2.csv'), delimiter=',')
 xs = []
 ys = []
 zs = []
@@ -149,33 +149,43 @@ for row in data:
 	counter=0	
 
 	for i in freqx:
-		f=100
-		omega = 2*numpy.pi*f
-		k=(2*numpy.pi)/omega
-		#print omega
-		displacement = i/(-(omega**2))
-		#print abs(displacement)
-		#numpy.append(fftvelx,displacement)
-		freqx[counter]=displacement
+		if counter < 3:
+			displacement=0
+		else:
+			f=100
+			omega = 2*numpy.pi*i
+			k=(2*numpy.pi)/omega
+			#print omega
+			displacement = i/(-(omega**2))
+			#print abs(displacement)
+			#numpy.append(fftvelx,displacement)
+
+			freqx[counter]=displacement
 		counter=counter+1		
 			
 	counter=0
 
 	for i in freqy:
-		f=100
-		omega = 2*numpy.pi*f
-		displacement = i/(-(omega**2))
-		freqy[counter]=displacement
+		if counter < 3:
+			displacement=0
+		else:
+			f=100
+			omega = 2*numpy.pi*i
+			displacement = i/(-(omega**2))
+			freqy[counter]=displacement
 		counter=counter+1
 
 	counter=0
 
 	for i in freqz:
-		f=100
-		omega = 2*numpy.pi*f
-		displacement = i/(-(omega**2))
-		#numpy.append(fftvelz,displacement)
-		freqz[counter]=displacement
+		if counter < 3:
+			displacement=0
+		else:
+			f=100
+			omega = 2*numpy.pi*i
+			displacement = i/(-(omega**2))
+			#numpy.append(fftvelz,displacement)
+			freqz[counter]=displacement
 		counter=counter+1
 
 	#print freqx

@@ -5,7 +5,7 @@ from time import sleep
 
 #dataset=csv.reader(open('data.csv'), delimiter=',')
 
-output = csv.writer(open('test.csv', 'a'), delimiter=',')
+output = csv.writer(open('128.csv', 'a'), delimiter=',')
 port = "/dev/rfcomm1"
 ser = serial.Serial(port, baudrate=9600, timeout=10)
 #global wholedata[]
@@ -25,8 +25,8 @@ while True:
     print "****************************************************"
     print "Application for recording stuff, press 1 when ready "
     print "150 samples each"
-     "****************************************************"
-    print "1: Left, 2: Right, 3: Forwards, 4: Backwards"
+    print  "****************************************************"
+    print "1: Left, 2: Right, 3: Forwards, 4: Backwards 5. grasp"
     #dump = ser.readline()
     #print dump
     selection = raw_input()
@@ -41,10 +41,11 @@ while True:
             sleep(1)
             print "GO!!!"
             buffer = ser.read(ser.inWaiting())
-	    ser.flushInput()
+	    ser.flushOutput()
+            ser.flushInput()
 	    for r in range(256):
 		    vector=[]
-		    ser.flushInput()
+		    ser.flushOutput()
 		    data = ser.readline()
 		    data = data.split(",")
 		    for i in data:
@@ -70,10 +71,11 @@ while True:
             sleep(1)
             print "GO!!!"
             buffer = ser.read(ser.inWaiting())
+	    ser.flushOutput()
 	    ser.flushInput()
 	    for r in range(256):
 		    vector=[]
-		    ser.flushInput()
+		    ser.flushOutput()
 		    data = ser.readline()
 		    data = data.split(",")
 		    for i in data:
@@ -100,9 +102,10 @@ while True:
             print "GO!!!"
             buffer = ser.read(ser.inWaiting())
 	    ser.flushOutput()
+	    ser.flushInput()
 	    for r in range(256):
 		    vector=[]
-		    ser.flushInput()
+		    ser.flushOutput()
 		    data = ser.readline()
 		    data = data.split(",")
 		    for i in data:
@@ -129,9 +132,10 @@ while True:
             print "GO!!!"
             buffer = ser.read(ser.inWaiting())
 	    ser.flushOutput()
+	    ser.flushInput()
 	    for r in range(256):
 		    vector=[]
-		    ser.flushInput()
+		    ser.flushOutput()
 		    data = ser.readline()
 		    data = data.split(",")
 		    for i in data:
@@ -149,7 +153,7 @@ while True:
 		   	print iline
 
     if selection == '5':
-    	    print "Get ready to record 'Grab' in 3..."
+    	    print "Get ready to record 'Grasp' in 3..."
 	    sleep(1)
 	    print "2..."
 	    sleep(1)
@@ -157,10 +161,11 @@ while True:
             sleep(1)
             print "GO!!!"
             buffer = ser.read(ser.inWaiting())
+	    ser.flushOutput()
 	    ser.flushInput()
 	    for r in range(256):
 		    vector=[]
-		    ser.flushInput()
+		    ser.flushOutput()
 		    data = ser.readline()
 		    data = data.split(",")
 		    for i in data:
@@ -169,7 +174,7 @@ while True:
 		    if len(vector) > 3:
 			line = vector[-3:]
 			iline = [int(n) for n in line]
-			iline.append('Grab')
+			iline.append('Grasp')
 			output.writerow(iline)
 			#vectorlist.append(iline)
 			#wholedata=vectorcreate()

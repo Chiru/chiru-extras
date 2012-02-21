@@ -5,8 +5,8 @@ from time import sleep
 
 #dataset=csv.reader(open('data.csv'), delimiter=',')
 
-output = csv.writer(open('3dgesturesfft2.csv', 'a'), delimiter=',')
-port = "/dev/rfcomm0"
+output = csv.writer(open('test.csv', 'a'), delimiter=',')
+port = "/dev/rfcomm1"
 ser = serial.Serial(port, baudrate=9600, timeout=10)
 #global wholedata[]
 #global vectorlist[]
@@ -25,14 +25,73 @@ while True:
     print "****************************************************"
     print "Application for recording stuff, press 1 when ready "
     print "150 samples each"
-    print "****************************************************"
+    "****************************************************"
+    print "1: Left, 2: Right, 3: Forwards, 4: Backwards"
     #dump = ser.readline()
     #print dump
     selection = raw_input()
     #buffer = ser.read(ser.inWaiting())
 
     if selection == '1':
-    	    print "Get ready to record in 3..."
+    	    print "Get ready to record 'Left' in 3..."
+	    sleep(1)
+	    print "2..."
+	    sleep(1)
+	    print "1..."
+            sleep(1)
+            print "GO!!!"
+            buffer = ser.read(ser.inWaiting())
+	    ser.flushInput()
+	    for r in range(256):
+		    vector=[]
+		    ser.flushInput()
+		    data = ser.readline()
+		    data = data.split(",")
+		    for i in data:
+		    	i=i.rstrip("\r\n")
+			vector.append(i)
+		    if len(vector) > 3:
+			line = vector[-3:]
+			iline = [int(n) for n in line]
+			iline.append('Left')
+			output.writerow(iline)
+			#vectorlist.append(iline)
+			#wholedata=vectorcreate()
+		   	#result=knntest2.knnestimate(knntest2.data,iline)
+			#print result
+		   	print iline
+
+    if selection == '2':
+    	    print "Get ready to record 'Right' in 3..."
+	    sleep(1)
+	    print "2..."
+	    sleep(1)
+	    print "1..."
+            sleep(1)
+            print "GO!!!"
+            buffer = ser.read(ser.inWaiting())
+	    ser.flushInput()
+	    for r in range(256):
+		    vector=[]
+		    ser.flushInput()
+		    data = ser.readline()
+		    data = data.split(",")
+		    for i in data:
+		    	i=i.rstrip("\r\n")
+			vector.append(i)
+		    if len(vector) > 3:
+			line = vector[-3:]
+			iline = [int(n) for n in line]
+			iline.append('Right')
+			output.writerow(iline)
+			#vectorlist.append(iline)
+			#wholedata=vectorcreate()
+		   	#result=knntest2.knnestimate(knntest2.data,iline)
+			#print result
+		   	print iline
+
+    if selection == '3':
+    	    print "Get ready to record 'Forwards' in 3..."
 	    sleep(1)
 	    print "2..."
 	    sleep(1)
@@ -43,7 +102,7 @@ while True:
 	    ser.flushOutput()
 	    for r in range(256):
 		    vector=[]
-		    ser.flushOutput()
+		    ser.flushInput()
 		    data = ser.readline()
 		    data = data.split(",")
 		    for i in data:
@@ -52,13 +111,72 @@ while True:
 		    if len(vector) > 3:
 			line = vector[-3:]
 			iline = [int(n) for n in line]
-			iline.append('Gesture')
+			iline.append('Forwards')
 			output.writerow(iline)
 			#vectorlist.append(iline)
 			#wholedata=vectorcreate()
 		   	#result=knntest2.knnestimate(knntest2.data,iline)
 			#print result
 		   	print iline
+
+    if selection == '4':
+    	    print "Get ready to record 'Backwards' in 3..."
+	    sleep(1)
+	    print "2..."
+	    sleep(1)
+	    print "1..."
+            sleep(1)
+            print "GO!!!"
+            buffer = ser.read(ser.inWaiting())
+	    ser.flushOutput()
+	    for r in range(256):
+		    vector=[]
+		    ser.flushInput()
+		    data = ser.readline()
+		    data = data.split(",")
+		    for i in data:
+		    	i=i.rstrip("\r\n")
+			vector.append(i)
+		    if len(vector) > 3:
+			line = vector[-3:]
+			iline = [int(n) for n in line]
+			iline.append('Backwards')
+			output.writerow(iline)
+			#vectorlist.append(iline)
+			#wholedata=vectorcreate()
+		   	#result=knntest2.knnestimate(knntest2.data,iline)
+			#print result
+		   	print iline
+
+    if selection == '5':
+    	    print "Get ready to record 'Grab' in 3..."
+	    sleep(1)
+	    print "2..."
+	    sleep(1)
+	    print "1..."
+            sleep(1)
+            print "GO!!!"
+            buffer = ser.read(ser.inWaiting())
+	    ser.flushInput()
+	    for r in range(256):
+		    vector=[]
+		    ser.flushInput()
+		    data = ser.readline()
+		    data = data.split(",")
+		    for i in data:
+		    	i=i.rstrip("\r\n")
+			vector.append(i)
+		    if len(vector) > 3:
+			line = vector[-3:]
+			iline = [int(n) for n in line]
+			iline.append('Grab')
+			output.writerow(iline)
+			#vectorlist.append(iline)
+			#wholedata=vectorcreate()
+		   	#result=knntest2.knnestimate(knntest2.data,iline)
+			#print result
+		   	print iline
+
 
 
     elif selection == '0':

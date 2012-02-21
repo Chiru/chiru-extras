@@ -1,0 +1,17 @@
+Grab and throw gesture recognition
+
+A common way of recognizing short gestures or longer actions such as walking or 
+running from accelerometer output is to calculate features from statistical 
+properties of the signal and use a classifier such as Support Vector Machine 
+to identify the actions [][][]. Another way is to plot the actual 3D trail of the 
+gesture by double integrating the x,y,z -positions from acceleration data []. 
+Hidden Markov Models are often used with both statistical and positional 
+features[]. Even though we are not currently using directional information in 
+throw movements, we chose the 3D trail based approach in this study for the 
+possibility to extract at least rough positional information from gestures 
+in future research.
+
+Generally integrating positional data from accelerometers is risky and inaccurate 
+as the sensor data is usually noisy and small measurement errors get exponential
+in the integration process. We compensated the measurement errors by adding a
+high-pass filter in the acceleration data.

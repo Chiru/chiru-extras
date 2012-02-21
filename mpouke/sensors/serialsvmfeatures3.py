@@ -5,6 +5,8 @@ from time import sleep
 #import svmcomplete
 import numpy
 import pywt
+from pylab import *
+from numpy import linalg as LA
 #output = csv.writer(open('directions.csv', 'wb'), delimiter=',')
 
 port = "/dev/rfcomm0"

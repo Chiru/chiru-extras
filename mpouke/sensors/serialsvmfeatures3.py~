@@ -101,18 +101,6 @@ try:
 			featuregx.append(float(gx))
 			featuregy.append(float(gy))
 			featuregz.append(float(gz))
-			#print ax
-			#line = vector[-6:]
-			#iline = [float(n) for n in line]
-			#print vector[-6:]
-			#output.writerow(line)
-		   	#result=svmcomplete.classify(iline)
-			#print result
-		    #sleep(0.5)
-		    #print 'not blocked'
-	    #print feature
-	    #print featureax
-	    #print len(featureax)
 	    if len(featureax)==64:
 		    eax = energy(featureax)
 		    eay = energy(featureay)
@@ -130,21 +118,10 @@ try:
 	
 		    energies.extend([eax,eay,eaz,egx,egy,egz])
 		    wavelets.extend([wavax,wavay,wavaz,wavgx,wavgy,wavgz])
-		    #print eax
-		    #print wavax[:128]
-	            #a = [item for sublist in allfeatures for item in sublist]
 		    print energies
-		    #print wavelets
-	            #print allfeatures
 	            wva = list(flatten(wavelets))
-		    #w = wva.tolist()
-		    #print wva
-		    #allfeatures.extend([energies, wva])
 	            allfeatures.extend([energies, wva])
-		    #print allfeatures
-		    #feat = allfeatures.tolist()
-		    #print allfeatures
-		    #print len(allfeatures)
+	
 	    	    af = list(flatten(allfeatures))
 		    print af
 		    print len(af)
