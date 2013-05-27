@@ -45,7 +45,7 @@ while True:
     #print dump
     selection = raw_input()
     #buffer = ser.read(ser.inWaiting())
-
+    ser.flushInput()
     if selection == '1':
     	    print "Get ready for 'Init' in 3..."
 	    sleep(1)

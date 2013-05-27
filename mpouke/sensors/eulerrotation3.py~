@@ -7,7 +7,7 @@ from pylab import *
 from numpy import linalg as LA
 from scipy import integrate
 
-data = csv.reader(open('final.csv'), delimiter=',')
+data = csv.reader(open('demo.csv'), delimiter=',')
 xs = []
 ys = []
 zs = []

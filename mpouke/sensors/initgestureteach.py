@@ -5,7 +5,7 @@ from time import sleep
 
 #dataset=csv.reader(open('data.csv'), delimiter=',')
 
-output = csv.writer(open('initgestures.csv', 'a'), delimiter=',')
+output = csv.writer(open('init.csv', 'a'), delimiter=',')
 dataset= csv.reader(open('data.csv'), delimiter=',')
 port = "/dev/rfcomm1"
 ser = serial.Serial(port, baudrate=9600, timeout=10)

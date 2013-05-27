@@ -73,6 +73,7 @@ def gesture3d():
 	    #print result
 	    #print iline
     #print accelerations
+    print len(accelerations)
     gesture=transform(accelerations)
     #gxs=[]
     #for g in gesture: gxs.append(g[0]) 
@@ -300,10 +301,12 @@ def measure(gesture):
 
 def measure2(gesture):
     cdistances=[]
+    #print len(gesture)
     gesture=np.asarray(gesture)
     for i in gesturelist:
         v2 = np.array([])
-        #print i
+        #print len(i)
+        #raw_input("Press enter when done...")
         for r in i:
             v2 = np.append(v2,(r[:3]))
         v2=v2.flatten()
